@@ -103,7 +103,7 @@ public class Main extends Activity {
                 Uri imageUri = Uri.fromFile(file);
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "我刚刚完成了1024！https://play.google.com/store/apps/details?id=com.nich01as.g1024.game");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "我刚刚完成了2048！https://play.google.com/store/apps/details?id=com.nich01as.g1024.game");
                 shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
                 shareIntent.setType("image/*");
                 shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

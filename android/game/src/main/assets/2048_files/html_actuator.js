@@ -144,7 +144,6 @@ HTMLActuator.prototype.message = function (won) {
   if (window.shareMode == 'app') {
     this.sharingContainer.appendChild(this.scoreTweetButton());
   }
-  twttr.widgets.load();
 };
 
 HTMLActuator.prototype.clearMessage = function () {
