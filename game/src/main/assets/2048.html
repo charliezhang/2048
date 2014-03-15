@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>1024</title>
+
+  <link href="./2048_files/main.css" rel="stylesheet" type="text/css">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+
+  <meta property="og:title" content="1024 game">
+  <meta property="og:site_name" content="1024 game">
+  <meta property="og:description" content="Join the numbers and get to the 2048 tile! Careful: this game is extremely addictive!">
+  <meta property="og:image" content="./2048_files/og_image.png">
+</head>
+<body data-twttr-rendered="true">
+  <div class="container">
+    <div class="heading">
+      <h1 class="title">2048</h1>
+      <div class="scores-container">
+        <div class="score-container">0</div>
+        <div class="best-container">0</div>
+      </div>
+    </div>
+    <p class="game-intro">合并方块搞到<strong>2048!</strong></p>
+
+    <div class="game-container">
+      <div class="game-message">
+        <p></p>
+        <div class="lower">
+	        <a class="keep-playing-button">继续</a>
+          <a class="retry-button">重来</a>
+          <div class="score-sharing"></div>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+      </div>
+
+      <div class="tile-container"><div class="tile tile-2 tile-position-1-2 tile-new"><div class="tile-inner">2</div></div><div class="tile tile-2 tile-position-2-3 tile-new"><div class="tile-inner">2</div></div></div>
+    </div>
+
+    <p class="game-explanation">
+      <strong class="important">如何玩耍：</strong> 上下左右滑动屏幕，当含有相同数字的方块连在一起时，他们就会合成一块！</strong>
+    </p>
+    <hr>
+    <a href="http://nich01as.com/g1024/share">分享到……</a>
+
+  <script src="./2048_files/animframe_polyfill.js"></script>
+  <script src="./2048_files/keyboard_input_manager.js"></script>
+  <script src="./2048_files/html_actuator.js"></script>
+  <script src="./2048_files/grid.js"></script>
+  <script src="./2048_files/tile.js"></script>
+  <script src="./2048_files/local_score_manager.js"></script>
+  <script src="./2048_files/game_manager.js"></script>
+  <script src="./2048_files/application.js"></script>
+</body></html>
