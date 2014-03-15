@@ -20,11 +20,14 @@
         android:textStyle="bold"
         android:textSize="50sp"
         android:gravity="center"
+        android:layout_weight="1"
         />
         <FrameLayout
             android:id="@+id/ads"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></FrameLayout>
+            android:background="@android:color/transparent"
+            android:layout_height="60dp">
+            </FrameLayout>
     </LinearLayout>
 
 </FrameLayout>

@@ -59,6 +59,7 @@ public class Main extends Activity {
     protected void onStart() {
         super.onStart();
         adView.loadAd(new AdRequest());
+        Log.d(TAG, "height " + adView.getHeight());
     }
 
     @Override
