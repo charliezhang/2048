@@ -16,6 +16,9 @@ body {
 .inline-block {
   display: inline-block;
 }
+.play-store img {
+  width:150px;
+}
 .buttons {
   margin-top: 10px;
 }

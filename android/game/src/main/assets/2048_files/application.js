@@ -28,5 +28,8 @@ window.requestAnimationFrame(function () {
         summary: '我的最高得分是' + scoreManager.get() + '!',
         pic: "http://erlingsiba.com/2048_files/og_image.png"
   });
-
+  if (navigator.userAgent.indexOf('Android') >= 0) {
+    var playStoreEls = document.getElementsByClassName('play-store');
+    playStoreEls[0].style.display = 'block';
+  }
 });
