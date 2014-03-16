@@ -21,4 +21,12 @@ window.requestAnimationFrame(function () {
     }
     expLink.innerText = showingExp ? '收起说明':'玩法说明';
   };
+  var scoreManager = new LocalScoreManager;
+  bShare.addEntry({
+        title: '2048 一个停不下来的游戏！',
+        url: 'http://erlingsiba.com',
+        summary: '我的最高得分是' + scoreManager.get() + '!',
+        pic: "http://erlingsiba.com/2048_files/og_image.png"
+  });
+
 });
