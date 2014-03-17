@@ -24,10 +24,10 @@ body {
 }
 
 h1.title {
-  font-size: 80px;
+  font-size: 40px;
   font-weight: bold;
   margin: 0;
-  display: block;
+  color: rgb(88, 77, 77);
   float: left; }
 
 @-webkit-keyframes move-up {

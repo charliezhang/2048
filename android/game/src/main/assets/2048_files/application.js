@@ -24,9 +24,9 @@ window.requestAnimationFrame(function () {
   var scoreManager = new LocalScoreManager;
   bShare.addEntry({
         title: '2048 一个停不下来的游戏！',
-        url: 'http://erlingsiba.com',
+        url: 'http://go2048.com',
         summary: '我的最高得分是' + scoreManager.get() + '!',
-        pic: "http://erlingsiba.com/2048_files/og_image.png"
+        pic: "http://go2048.com/2048_files/og_image.png"
   });
   if (navigator.userAgent.indexOf('Android') >= 0) {
     var playStoreEls = document.getElementsByClassName('play-store');
