@@ -25,6 +25,19 @@ window.requestAnimationFrame(function () {
     }
     expLink.innerText = showingExp ? '收起说明':'玩法说明';
   };
+
+  var showingTip = false;
+  var gameTips = document.getElementsByClassName('game-tip');
+  var tipLink = document.getElementById('tip-link');
+  document.getElementById('game-tip-toggle').onclick = function() {
+    showingTip = !showingTip;
+    for (var i = 0; i < gameTips.length; i++) {
+      gameTips[i].style.display = showingTip ? 'block' : 'none';
+    }
+    tipLink.innerText = showingTip ? "收起攻略" : "高分技巧";
+    
+  }
+  
   var scoreManager = new LocalScoreManager;
   bShare.addEntry({
         title: '2048 一个停不下来的游戏！',

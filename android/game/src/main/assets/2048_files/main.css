@@ -510,6 +510,21 @@ hr {
   padding: 2px 5px 2px 5px;
   margin-top: 50px; }
 
+.game-explanation img {
+  width: 200px;  
+  margin: 20px 20px 20px;
+}
+
+
+.game-tip {
+  background-color: rgb(153, 153, 147);
+  border-radius: 10px;
+  color: white;
+  padding: 2px 5px 2px 5px;
+  margin-top: 50px; }
+
+
+
 .sharing {
   margin-top: 20px;
   text-align: center; }
