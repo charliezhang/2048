@@ -3,21 +3,8 @@
   "score": 19836,
   "max_number": 2048,
   "time_used": 3512,
-  "country": "CN",
   "payload": {
-    "init":
-      [
-        {"x":0,"y":3,"v":2},
-        {"x":2,"y":3,"v":2}
-      ],
-    "steps":
-      [
-        {
-          "arr": "u",
-          "new_tiles": [
-            {"x":1,"y":2,"v":4}
-          ]
-        }
-      ]
+    "seed": 12345,
+    "moves": "1,2,1,0,3,1,2,0",
   }
 }

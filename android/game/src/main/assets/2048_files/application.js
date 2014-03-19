@@ -1,9 +1,10 @@
 // Wait till the browser is ready to render the game (avoids glitches)
 window.requestAnimationFrame(function () {
-  var seed = int(Math.random() * 123456789);
+  var seed = Math.round(Math.random() * 123456789);
   var recorder = new GameRecorder(seed);
+  recorder.recordMove(1);
   new GameManager(4, KeyboardInputManager, HTMLActuator, LocalScoreManager,
-    recorder, new Random(seed));
+    recorder, new Rand(seed));
   var toHide;
   window.isApp = navigator.userAgent.indexOf('2048-android') >= 0 || navigator.userAgent.indexOf('2048-ios') >=0;
   if (!isApp) {

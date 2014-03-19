@@ -131,7 +131,7 @@ HTMLActuator.prototype.updateBestScore = function (bestScore) {
 
 HTMLActuator.prototype.message = function (won) {
   var type    = won ? "game-won" : "game-over";
-  var message = won ? "你赢了1024！" : "你输了！";
+  var message = won ? "你赢了2048！" : "你输了！";
 
   if (typeof ga !== "undefined") {
     ga("send", "event", "game", "end", type, this.score);
@@ -159,3 +159,5 @@ HTMLActuator.prototype.scoreTweetButton = function () {
   tweet.textContent = "奔走相告，告诉小伙伴！";
   return tweet;
 };
+
+

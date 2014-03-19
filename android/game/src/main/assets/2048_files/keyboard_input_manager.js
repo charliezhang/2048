@@ -28,14 +28,14 @@ KeyboardInputManager.prototype.listen = function () {
     39: 1, // Right
     40: 2, // Down
     37: 3, // Left
-    75: 0, // vim keybindings
+/*   75: 0, // vim keybindings
     76: 1,
     74: 2,
     72: 3,
     87: 0, // W
     68: 1, // D
     83: 2, // S
-    65: 3  // A
+    65: 3  // A */
   };
 
   document.addEventListener("keydown", function (event) {
@@ -60,6 +60,9 @@ KeyboardInputManager.prototype.listen = function () {
   var keepPlaying = document.querySelector(".keep-playing-button");
   keepPlaying.addEventListener("click", this.keepPlaying.bind(this));
   keepPlaying.addEventListener("touchend", this.keepPlaying.bind(this));
+
+  var saveName = document.querySelector(".save-name");
+  saveName.addEventListener("click", this.saveName.bind(this));
 
   // Listen to swipe events
   var touchStartClientX, touchStartClientY;
@@ -101,4 +104,9 @@ KeyboardInputManager.prototype.restart = function (event) {
 KeyboardInputManager.prototype.keepPlaying = function (event) {
   event.preventDefault();
   this.emit("keepPlaying");
+};
+
+KeyboardInputManager.prototype.saveName = function (event) {
+  event.preventDefault();
+  this.emit("saveName");
 };

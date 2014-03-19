@@ -1,8 +1,10 @@
 var http = require('http');
 var express = require('express');
 var controllers = require('./controllers.js');
+var cors = require('cors');
 var app = express();
 
+app.use(cors());
 app.use(express.bodyParser());
 
 app.get('/scores', controllers.get_scores);

@@ -4,7 +4,7 @@ var db = new sqlite3.Database(configs.SQLITE_FILENAME);
 
 exports.get_scores = function(limit, cb) {
   var scores = [];
-  db.each('SELECT * FROM scores LIMIT ?', limit || 10, function (err, row) {
+  db.each('SELECT * FROM scores ORDER BY score DESC LIMIT ?', limit || 10, function (err, row) {
     scores.push({
         'nickname': row.nickname,
         'score': row.score,
