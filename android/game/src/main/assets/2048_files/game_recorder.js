@@ -6,7 +6,6 @@ function GameRecorder(seed) {
 }
 
 GameRecorder.prototype.recordMove = function(direction) {
-  console.log('record: ' + direction);
   this.moves.push(direction);
 }
 
