@@ -534,6 +534,11 @@ hr {
   margin-top: 50px; }
 .rank a {
   color: white;
+  margin-left: 20px;
+  font-size: 15px;
+}
+.rank span {
+  margin-left: 20px;
 }
 
 .game-explanation img {

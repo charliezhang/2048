@@ -55,7 +55,22 @@ load_score = function(offset) {
   var myConn = new XHConn();
 
   if (myConn) {
-    var fnWhenDone = function (oXML) { alert(oXML.responseText); };
+    var fnWhenDone = function (oXML) { 
+      var scoreObject = JSON.parse(oXML.responseText); 
+      var rank = document.getElementById('rank-list');
+      for(var i = 0; i < scoreObject.scores.length; i++) {
+        var span = document.createElement('span');
+        span.innerText = scoreObject.scores[i].nickname;
+        var li = document.createElement('li');
+
+        li.appendChild(span);
+        span = document.createElement('span');
+        span.innerText = scoreObject.scores[i].score;
+        li.appendChild(span);
+
+        rank.appendChild(li);
+      }
+    };
     myConn.connect("scores", "GET", 'offset=' + offset, fnWhenDone);
   }
 }
