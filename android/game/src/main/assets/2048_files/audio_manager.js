@@ -4,16 +4,16 @@ function AudioManager() {
 }
 
 AudioManager.prototype.pause = function() {
-  this.audio.pause();
-  this.bigAudio.pause();
-  this.audio.currentTime = 0;
-  this.bigAudio.currentTime = 0;
+//  this.audio.pause();
+//  this.bigAudio.pause();
+//  this.audio.currentTime = 0;
+//  this.bigAudio.currentTime = 0;
 }
 
 AudioManager.prototype.play = function(largest) {
-  if (largest > 64) {
-    this.bigAudio.play();
-  } else if (largest > 0) {
-    this.audio.play();
-  }
+//  if (largest > 64) {
+//    this.bigAudio.play();
+//  } else if (largest > 0) {
+//    this.audio.play();
+//  }
 }
