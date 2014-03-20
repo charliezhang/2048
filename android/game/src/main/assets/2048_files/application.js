@@ -61,7 +61,7 @@ window.requestAnimationFrame(function () {
     }
   }
   document.getElementById('rank-more').onclick = function() {
-    offset = offset + 10;
     load_score(offset);
+    offset = offset + 10;
   };
 });
