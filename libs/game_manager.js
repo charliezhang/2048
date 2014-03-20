@@ -61,7 +61,7 @@ GameManager.prototype.setup = function (s) {
 
   this.score       = 0;
   this.maxNumber   = 2;
-  this.goal        = 64;
+  this.goal        = 2048;
   this.over        = false;
   this.won         = false;
   this.keepPlaying = false;
