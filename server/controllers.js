@@ -80,8 +80,13 @@ exports.post_scores = function (req, res) {
     res.send(400);
   }
   
-  db.add_score(req.body, function () {
-    res.send(200);
+  db.add_score(req.body, function (err) {
+    if (err == null) {
+      res.send(200);
+    } else {
+      res.status(500);
+      res.json(err);
+    }
   });
 }
 
