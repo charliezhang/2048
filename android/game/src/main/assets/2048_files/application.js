@@ -45,4 +45,5 @@ window.requestAnimationFrame(function () {
     var playStoreEls = document.getElementsByClassName('play-store');
     playStoreEls[0].style.display = 'block';
   }
+
 });
