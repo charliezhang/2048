@@ -36,7 +36,7 @@ window.requestAnimationFrame(function () {
   
   var scoreManager = new LocalScoreManager;
   bShare.addEntry({
-        title: '#Go2048 一个停不下来的游戏！',
+        title: '#Go2048# 一个停不下来的游戏！',
         url: 'http://go2048.com',
         summary: '我的最高得分是' + scoreManager.get() + '!',
         pic: "http://go2048.com/2048_files/og_image.png"
