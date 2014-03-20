@@ -27,6 +27,7 @@
   </script>
 </head>
 <body data-twttr-rendered="true">
+  <audio id="merge-audio" src="http://www.storiesinflight.com/html5/audio/piano_chord.wav" preload="auto"></audio>
   <div class="container">
     <div class="play-store hide">
       <a target="_blank" href="https://play.google.com/store/apps/details?id=com.nich01as.g1024.game">
@@ -46,10 +47,15 @@
         <a href="http://nich01as.com/g1024/share">截图分享</a>
       </div>
     </div>
-    <p class="game-explanation hide">
+    <div class="game-explanation hide">
       上下左右滑动屏幕或上下左右键盘，当含有相同数字的方块连在一起时，他们就会合成一块！</strong>
       游戏的目标只有一个：得到一个含有2048的数字方块！当然喽，分数越高就意味着离2048越近了~加油吧，祝大家玩的开心！
-    </p>
+      <div class="img-exp">
+        <a id="img-previous" class="hide" href="#">&lt;--</a>
+        <img id="img-explanation" src="http://galleria.io/static/i/gd.jpg"></img>
+        <a id="img-next" href="#">--&gt;</a>
+      </div>
+    </div>
     
     <div class="web-share">
       <a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=&amp;style=3&amp;fs=4&amp;textcolor=#fff&amp;bgcolor=#9C3&amp;text=分享到&amp;pophcol=1"></script>

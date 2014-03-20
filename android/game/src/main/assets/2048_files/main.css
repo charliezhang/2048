@@ -22,7 +22,23 @@ body {
 .buttons {
   margin-top: 10px;
 }
-
+.img-exp img {
+  width: 350px;
+  padding: 5px 10px 5px 10px;
+}
+.img-exp a {
+  margin-top: 90px;
+}
+.img-exp {
+  text-align: center;
+}
+#img-previous {
+  float: left;
+}
+#img-next {
+  float: right;
+}
+  
 h1.title {
   font-size: 40px;
   font-weight: bold;

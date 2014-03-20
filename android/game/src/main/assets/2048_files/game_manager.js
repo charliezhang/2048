@@ -111,9 +111,12 @@ GameManager.prototype.move = function (direction) {
   var vector     = this.getVector(direction);
   var traversals = this.buildTraversals(vector);
   var moved      = false;
+  var audio      =  document.getElementById('merge-audio');
 
   // Save the current tile positions and remove merger information
   this.prepareTiles();
+  audio.pause();
+  audio.currentTime = 0;
 
   // Traverse the grid in the right direction and move tiles
   traversals.x.forEach(function (x) {
@@ -135,10 +138,10 @@ GameManager.prototype.move = function (direction) {
 
           // Converge the two tiles' positions
           tile.updatePosition(positions.next);
+          document.getElementById('merge-audio').play();
 
           // Update the score
           self.score += merged.value;
-
           // The mighty 2048 tile
           // TODO(nicholas): Change to 1024
           if (merged.value === 2048) self.won = true;
