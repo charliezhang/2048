@@ -55,8 +55,9 @@ window.requestAnimationFrame(function () {
     showingRank = !showingRank;
     document.getElementById('rank').style.display = showingRank ? 'block' : 'none';
     rankLink.innerText = showingRank ? "收起榜单" : "英雄榜";
-    if (showingRank) {
+    if (showingRank && offset == 0) {
       load_score(offset);
+      offset = offset + 10;
     }
   }
   document.getElementById('rank-more').onclick = function() {
