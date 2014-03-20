@@ -59,12 +59,12 @@ load_score = function(offset) {
       var rank = document.getElementById('rank-list');
       for(var i = 0; i < scoreObject.scores.length; i++) {
         var span = document.createElement('span');
-        span.innerText = scoreObject.scores[i].nickname;
+        setContent(span, scoreObject.scores[i].nickname);
         var li = document.createElement('li');
 
         li.appendChild(span);
         span = document.createElement('span');
-        span.innerText = scoreObject.scores[i].score;
+        setContent(span, scoreObject.scores[i].score);
         li.appendChild(span);
 
         rank.appendChild(li);
@@ -72,4 +72,12 @@ load_score = function(offset) {
     };
     myConn.connect("scores", "GET", 'offset=' + offset, fnWhenDone);
   }
+}
+
+setContent = function(el, text) {
+    if (el.textContent != "undefined") {
+        el.textContent = text;
+    } else {
+       el.innerText = text;
+    }
 }
