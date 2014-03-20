@@ -13,7 +13,7 @@ exports.get_scores = function (req, res) {
 }
 
 
-validate = function (data) {
+validate = function (data, goal) {
   var payload = data.payload;
   var ran = new rand.Rand();
   var seed = payload.seed;
@@ -45,10 +45,18 @@ validate = function (data) {
     this.get = function() {},
     this.set = function(s) {}
   }
+  function MockAudioManager() {
+    this.pause = function() {},
+    this.play = function(l) {}
+  };
+  
 
   var gm = new game_manager.GameManager(
-      4, MockKeyboardInputManager, Actuator, MockScoreManager);
+      4, MockKeyboardInputManager, Actuator, MockScoreManager, MockAudioManager);
   gm.setup(seed);
+  if (goal) {
+    gm.setGoal(goal);
+  }
   var moves = payload.moves.split(',');
   for (var d in moves) {
     gm.move(parseInt(moves[d]));

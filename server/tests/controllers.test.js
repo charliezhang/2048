@@ -19,7 +19,7 @@ invalid_score2 =
 exports.testValid = function(test) {
   test.equal(
       "OK",
-      controllers.validate(valid_score)
+      controllers.validate(valid_score, 32)
   );
   test.done();
 }
@@ -27,7 +27,7 @@ exports.testValid = function(test) {
 exports.testInValid = function(test) {
   test.equal(
       "SCORE_NOT_MATCH",
-      controllers.validate(invalid_score)
+      controllers.validate(invalid_score, 32)
   );
   test.done();
 }
@@ -35,7 +35,7 @@ exports.testInValid = function(test) {
 exports.testInValid2 = function(test) {
   test.equal(
       "SCORE_NOT_MATCH",
-      controllers.validate(invalid_score2)
+      controllers.validate(invalid_score2, 32)
   );
   test.done();
 }

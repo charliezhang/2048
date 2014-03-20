@@ -5,13 +5,13 @@ var Rand = require('./rand.js').Rand;
 var GameRecorder = require('./game_recorder.js').GameRecorder;
 }
 
-function GameManager(size, InputManager, Actuator, ScoreManager) {
+function GameManager(size, InputManager, Actuator, ScoreManager, AudioManager) {
   this.size         = size; // Size of the grid
   this.inputManager = new InputManager;
   this.scoreManager = new ScoreManager;
   this.actuator     = new Actuator;
 
-
+  this.audioManager = new AudioManager;
   this.startTiles   = 2;
 
   this.inputManager.on("move", this.move.bind(this));
@@ -60,7 +60,8 @@ GameManager.prototype.setup = function (s) {
   this.grid        = new Grid(this.size, this.rand);
 
   this.score       = 0;
-  this.maxNumber    = 2;
+  this.maxNumber   = 2;
+  this.goal        = 64;
   this.over        = false;
   this.won         = false;
   this.keepPlaying = false;
@@ -73,6 +74,10 @@ GameManager.prototype.setup = function (s) {
   // Update the actuator
   this.actuate();
 };
+
+GameManager.prototype.setGoal = function(goal) {
+  this.goal = goal;
+}
 
 // Set up the initial tiles to start the game with
 GameManager.prototype.addStartTiles = function () {
@@ -146,9 +151,11 @@ GameManager.prototype.move = function (direction) {
   var vector     = this.getVector(direction);
   var traversals = this.buildTraversals(vector);
   var moved      = false;
+  var largest    = 0;
 
   // Save the current tile positions and remove merger information
   this.prepareTiles();
+  this.audioManager.pause();
 
   // Traverse the grid in the right direction and move tiles
   traversals.x.forEach(function (x) {
@@ -166,6 +173,7 @@ GameManager.prototype.move = function (direction) {
           if (merged.value > self.maxNumber) {
             self.maxNumber = merged.value;
           }
+          largest = largest > merged.value ? largest : merged.value;
           merged.mergedFrom = [tile, next];
 
           self.grid.insertTile(merged);
@@ -178,8 +186,7 @@ GameManager.prototype.move = function (direction) {
           self.score += merged.value;
 
           // The mighty 2048 tile
-          // TODO
-          if (merged.value === 32) {
+          if (merged.value == self.goal) {
             self.won = true; 
           }
         } else {
@@ -192,6 +199,9 @@ GameManager.prototype.move = function (direction) {
       }
     });
   });
+ 
+  this.audioManager.play(largest);
+  
   if (moved) {
     this.addRandomTile();
 

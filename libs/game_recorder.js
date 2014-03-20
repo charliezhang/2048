@@ -20,4 +20,6 @@ GameRecorder.prototype.reset = function(seed) {
   this.seed = seed;
 }
 
+if (typeof exports != 'undefined') {
 exports.GameRecorder = GameRecorder;
+}

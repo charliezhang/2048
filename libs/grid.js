@@ -85,4 +85,6 @@ Grid.prototype.withinBounds = function (position) {
          position.y >= 0 && position.y < this.size;
 };
 
+if (typeof exports != 'undefined') {
 exports.Grid = Grid;
+}

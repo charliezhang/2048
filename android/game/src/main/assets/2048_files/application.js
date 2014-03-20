@@ -1,6 +1,6 @@
 // Wait till the browser is ready to render the game (avoids glitches)
 window.requestAnimationFrame(function () {
-  new GameManager(4, KeyboardInputManager, HTMLActuator, LocalScoreManager);
+  new GameManager(4, KeyboardInputManager, HTMLActuator, LocalScoreManager, AudioManager);
   var toHide;
   window.isApp = navigator.userAgent.indexOf('2048-android') >= 0 || navigator.userAgent.indexOf('2048-ios') >=0;
   if (!isApp) {
