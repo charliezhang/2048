@@ -7,7 +7,7 @@ exports.not_found = function (req, res) {
 }
 
 exports.get_scores = function (req, res) {
-  db.get_scores(req.query.limit || 10, function (scores) {
+  db.get_scores(req.query.limit || 10, req.query.offset || 0, function (scores) {
     res.json({'scores': scores});
   });
 }

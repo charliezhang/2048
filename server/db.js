@@ -2,9 +2,9 @@ var sqlite3 = require('sqlite3').verbose();
 var configs = require('./configs.js');
 var db = new sqlite3.Database(configs.SQLITE_FILENAME);
 
-exports.get_scores = function(limit, cb) {
+exports.get_scores = function(limit, offset, cb) {
   var scores = [];
-  db.each('SELECT * FROM scores ORDER BY score DESC LIMIT ?', limit || 10, function (err, row) {
+  db.each('SELECT * FROM scores ORDER BY score DESC LIMIT ? OFFSET ?', limit || 10, offset || 0, function (err, row) {
     scores.push({
         'nickname': row.nickname,
         'score': row.score,
@@ -25,8 +25,8 @@ exports.seed_exists = function(seed) {
 }
 
 exports.add_score = function(row, cb) {
-  db.run('INSERT INTO scores VALUES (?,?,?,?,?,?)',
-     [row.nickname, row.score, row.max_number, row.time_used, row.country, row.payload],
+  db.run('INSERT INTO scores VALUES (?,?,?,?,?,?,?)',
+     [row.nickname, row.score, row.max_number, row.time_used, row.country, row.payload, row.payload.seed],
      cb
   );
 }
