@@ -1,6 +1,10 @@
 // Wait till the browser is ready to render the game (avoids glitches)
 window.requestAnimationFrame(function () {
-  new GameManager(4, KeyboardInputManager, HTMLActuator, LocalScoreManager);
+  var seed = Math.round(Math.random() * 123456789);
+  var recorder = new GameRecorder(seed);
+  recorder.recordMove(1);
+  new GameManager(4, KeyboardInputManager, HTMLActuator, LocalScoreManager,
+    recorder, new Rand(seed));
   var toHide;
   window.isApp = navigator.userAgent.indexOf('2048-android') >= 0 || navigator.userAgent.indexOf('2048-ios') >=0;
   if (!isApp) {
@@ -21,6 +25,19 @@ window.requestAnimationFrame(function () {
     }
     expLink.innerText = showingExp ? '收起说明':'玩法说明';
   };
+
+  var showingTip = false;
+  var gameTips = document.getElementsByClassName('game-tip');
+  var tipLink = document.getElementById('tip-link');
+  document.getElementById('game-tip-toggle').onclick = function() {
+    showingTip = !showingTip;
+    for (var i = 0; i < gameTips.length; i++) {
+      gameTips[i].style.display = showingTip ? 'block' : 'none';
+    }
+    tipLink.innerText = showingTip ? "收起攻略" : "高分技巧";
+    
+  }
+  
   var scoreManager = new LocalScoreManager;
   bShare.addEntry({
         title: '2048 一个停不下来的游戏！',
@@ -33,27 +50,4 @@ window.requestAnimationFrame(function () {
     playStoreEls[0].style.display = 'block';
   }
 
-
-  var imgs = ['http://galleria.io/static/i/gd.jpg',
-     'http://galleria.io/static/i/s2013/3s.jpg'];
-  var previousImg = document.getElementById('img-previous');
-  var nextImg = document.getElementById('img-next');
-  var imgExp = document.getElementById('img-explanation');
-  var now = 0;
-  nextImg.onclick = function() {
-    now = now + 1;
-    imgExp.src = imgs[now];
-    if (now == imgs.length -1) {
-      nextImg.style.display = 'none';
-    }
-    previousImg.style.display = 'inline';
-  };
-  previousImg.onclick = function() {
-    now = now - 1;
-    imgExp.src = imgs[now];
-    if (now == 0) {
-      previousImg.style.display = 'none';
-    }
-    nextImg.style.display = 'inline';
-  };
 });

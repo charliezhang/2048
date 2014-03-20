@@ -1,18 +1,16 @@
-function GameManager(size, InputManager, Actuator, ScoreManager, gameRecorder, rand) {
+function GameManager(size, InputManager, Actuator, ScoreManager, gameRecorder, random) {
   this.size         = size; // Size of the grid
   this.inputManager = new InputManager;
   this.scoreManager = new ScoreManager;
   this.actuator     = new Actuator;
-  this.gameRecorder = gameRecorder;
-  this.rand         = rand;
+  this.gameRecorder = GameRecorder;
+  this.random       = random;
 
   this.startTiles   = 2;
-  this.maxNumber    = 2;
 
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
-  this.inputManager.on("saveName", this.saveName.bind(this));
 
   this.setup();
 }
@@ -28,15 +26,6 @@ GameManager.prototype.keepPlaying = function () {
   this.keepPlaying = true;
   this.actuator.continue();
 };
-
-GameManager.prototype.saveName = function () {
-  var nameInput = document.querySelector(".name-input");
-  if (!nameInput.value) {
-    window.alert('昵称不能为空');
-  } else {
-    this.postScore(nameInput.value, this.getMetadata()); 
-  }
-}
 
 GameManager.prototype.isGameTerminated = function () {
   if (this.over || (this.won && !this.keepPlaying)) {
@@ -72,24 +61,12 @@ GameManager.prototype.addStartTiles = function () {
 // Adds a tile in a random position
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
-    var value = this.rand.random() < 0.9 ? 2 : 4;
+    var value = random.random() < 0.9 ? 2 : 4;
     var tile = new Tile(this.grid.randomAvailableCell(), value);
 
     this.grid.insertTile(tile);
   }
 };
-
-GameManager.prototype.getMetadata = function() {
-  return {
-    score:      this.score,
-    over:       this.over,
-    won:        this.won,
-    bestScore:  this.scoreManager.get(),
-    terminated: this.isGameTerminated(),
-    gameRecorder: this.gameRecorder,
-    maxNumber: this.maxNumber,
-  };
-}
 
 // Sends the updated grid to the actuator
 GameManager.prototype.actuate = function () {
@@ -97,10 +74,14 @@ GameManager.prototype.actuate = function () {
     this.scoreManager.set(this.score);
   }
 
-  this.actuator.actuate(
-    this.grid,
-    this.getMetadata()
-  );
+  this.actuator.actuate(this.grid, {
+    score:      this.score,
+    over:       this.over,
+    won:        this.won,
+    bestScore:  this.scoreManager.get(),
+    terminated: this.isGameTerminated()
+  });
+
 };
 
 // Save all tile positions and remove merger info
@@ -133,16 +114,9 @@ GameManager.prototype.move = function (direction) {
   var vector     = this.getVector(direction);
   var traversals = this.buildTraversals(vector);
   var moved      = false;
-  var audio      =  document.getElementById('merge-audio');
-  var bigAudio   = document.getElementById('big-audio');
-  var largest    = 0;
 
   // Save the current tile positions and remove merger information
   this.prepareTiles();
-  audio.pause();
-  audio.currentTime = 0;
-  bigAudio.pause();
-  bigAudio.currentTime = 0;
 
   // Traverse the grid in the right direction and move tiles
   traversals.x.forEach(function (x) {
@@ -157,10 +131,6 @@ GameManager.prototype.move = function (direction) {
         // Only one merger per row traversal?
         if (next && next.value === tile.value && !next.mergedFrom) {
           var merged = new Tile(positions.next, tile.value * 2);
-          if (merged.value > self.maxNumber) {
-            self.maxNumber = merged.value;
-          }
-          largest = largest > merged.value ? largest : merged.value;
           merged.mergedFrom = [tile, next];
 
           self.grid.insertTile(merged);
@@ -171,11 +141,10 @@ GameManager.prototype.move = function (direction) {
 
           // Update the score
           self.score += merged.value;
+
           // The mighty 2048 tile
-          // TODO
-          if (merged.value === 2048) {
-            self.won = true; 
-          }
+          // TODO(nicholas): Change to 1024
+          if (merged.value === 2048) self.won = true;
         } else {
           self.moveTile(tile, positions.farthest);
         }
@@ -187,11 +156,6 @@ GameManager.prototype.move = function (direction) {
     });
   });
 
-  if (largest > 64) {
-    bigAudio.play();
-  } else if (largest > 0) {
-    audio.play();
-  }
   if (moved) {
     this.addRandomTile();
 
@@ -283,12 +247,3 @@ GameManager.prototype.tileMatchesAvailable = function () {
 GameManager.prototype.positionsEqual = function (first, second) {
   return first.x === second.x && first.y === second.y;
 };
-
-GameManager.prototype.postScore = function(name, metadata) {
-  post_json('scores', {
-    "nickname": name,
-    "score": metadata.score,
-    "max_number": metadata.maxNumber,
-    "payload": metadata.gameRecorder.serialize(),
-  }); 
-}

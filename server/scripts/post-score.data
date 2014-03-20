@@ -1,0 +1,10 @@
+{
+  "nickname": "zx",
+  "score": 19836,
+  "max_number": 2048,
+  "time_used": 3512,
+  "payload": {
+    "seed": 12345,
+    "moves": "1,2,1,0,3,1,2,0",
+  }
+}
