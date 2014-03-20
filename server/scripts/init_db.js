@@ -3,7 +3,7 @@ var configs = require('../configs.js');
 var db = new sqlite3.Database(configs.SQLITE_FILENAME);
 
 db.serialize(function() {
-  db.run("DROP TABLE IF EXISTS scores");
+//  db.run("DROP TABLE IF EXISTS scores");
   db.run("CREATE TABLE IF NOT EXISTS scores " +
     "(nickname TEXT, score INT, max_number INT, time_used INT, " +
     "country TEXT, payload TEXT, seed INT)");
