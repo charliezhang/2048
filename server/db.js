@@ -17,6 +17,13 @@ exports.get_scores = function(limit, cb) {
   });
 }
 
+exports.seed_exists = function(seed) {
+  // TODO
+  return false;
+  //  db.get('SELECT seed FROM scores WHERE seed = ?', seed, function(row, err) {
+  // }
+}
+
 exports.add_score = function(row, cb) {
   db.run('INSERT INTO scores VALUES (?,?,?,?,?,?)',
      [row.nickname, row.score, row.max_number, row.time_used, row.country, row.payload],

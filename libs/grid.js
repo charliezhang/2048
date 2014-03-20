@@ -1,7 +1,9 @@
-function Grid(size) {
+function Grid(size, rand) {
   this.size = size;
 
   this.cells = [];
+
+  this.rand = rand;
 
   this.build();
 }
@@ -22,7 +24,7 @@ Grid.prototype.randomAvailableCell = function () {
   var cells = this.availableCells();
 
   if (cells.length) {
-    return cells[Math.floor(Math.random() * cells.length)];
+    return cells[Math.floor(this.rand.random() * cells.length)];
   }
 };
 
@@ -82,3 +84,5 @@ Grid.prototype.withinBounds = function (position) {
   return position.x >= 0 && position.x < this.size &&
          position.y >= 0 && position.y < this.size;
 };
+
+exports.Grid = Grid;
