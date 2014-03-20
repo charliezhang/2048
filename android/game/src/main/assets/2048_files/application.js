@@ -36,7 +36,7 @@ window.requestAnimationFrame(function () {
   
   var scoreManager = new LocalScoreManager;
   bShare.addEntry({
-        title: '2048 一个停不下来的游戏！',
+        title: '#Go2048 一个停不下来的游戏！',
         url: 'http://go2048.com',
         summary: '我的最高得分是' + scoreManager.get() + '!',
         pic: "http://go2048.com/2048_files/og_image.png"
@@ -45,5 +45,22 @@ window.requestAnimationFrame(function () {
     var playStoreEls = document.getElementsByClassName('play-store');
     playStoreEls[0].style.display = 'block';
   }
+  
 
+
+  var rankLink = document.getElementById('rank-link');
+  var showingRank = false;
+  var offset = 0;
+  document.getElementById('rank-toggle').onclick = function() {
+    showingRank = !showingRank;
+    document.getElementById('rank').style.display = showingRank ? 'block' : 'none';
+    rankLink.innerText = showingRank ? "收起榜单" : "英雄榜";
+    if (showingRank) {
+      load_score(offset);
+    }
+  }
+  document.getElementById('rank-more').onclick = function() {
+    offset = offset + 10;
+    load_score(offset);
+  };
 });
