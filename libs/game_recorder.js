@@ -1,12 +1,10 @@
 // Record game states history for validation.
 
 function GameRecorder(seed) {
-  this.moves = [];
-  this.seed = seed;
+  this.reset(seed);
 }
 
 GameRecorder.prototype.recordMove = function(direction) {
-  console.log('record: ' + direction);
   this.moves.push(direction);
 }
 
@@ -16,3 +14,10 @@ GameRecorder.prototype.serialize = function() {
     'seed': this.seed,
   };
 }
+
+GameRecorder.prototype.reset = function(seed) {
+  this.moves = [];
+  this.seed = seed;
+}
+
+exports.GameRecorder = GameRecorder;
