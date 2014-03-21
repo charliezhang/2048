@@ -25,6 +25,7 @@ window.requestAnimationFrame(function () {
   var showingTip = false;
   var gameTips = document.getElementsByClassName('game-tip');
   var tipLink = document.getElementById('tip-link');
+
   document.getElementById('game-tip-toggle').onclick = function() {
     showingTip = !showingTip;
     for (var i = 0; i < gameTips.length; i++) {
@@ -64,4 +65,16 @@ window.requestAnimationFrame(function () {
     load_score(offset);
     offset = offset + 10;
   };
+  
+  if (language() != 'zh') {
+    tipLink.style.display = 'none';
+    expLink.style.display = 'none';
+    for (i in gameTips) gameTips[i].style.display = 'none';
+    document.getElementById('game-tip-toggle').style.display = 'none';
+    document.getElementById('how-to').style.display = 'none';
+    document.getElementById('tweet').innerHtml = '<a href="https://twitter.com/go2048" target="_blank">@go2048</a>';
+  } else {
+  }
 });
+
+
