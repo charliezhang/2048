@@ -53,24 +53,36 @@ post_json = function(path, obj, cb) {
   xmlhttp.send(JSON.stringify(obj));
 }
 
+add_row = function(tableEle, c1, c2, c3, c4) {
+  var td = document.createElement('td');
+  setContent(td, c1);
+  var tr= document.createElement('tr');
+  tr.appendChild(td);
+
+  td = document.createElement('td');
+  setContent(td, c2);
+  tr.appendChild(td);
+
+  td = document.createElement('td');
+  setContent(td, c3);
+  tr.appendChild(td);
+
+  td = document.createElement('td');
+  setContent(td, c4);
+  tr.appendChild(td);
+
+  tableEle.appendChild(tr);
+}
+
 load_score = function(offset) {
   var myConn = new XHConn();
 
   if (myConn) {
     var fnWhenDone = function (oXML) { 
       var scoreObject = JSON.parse(oXML.responseText); 
-      var rank = document.getElementById('rank-list');
+      var rank = document.getElementById('rank-table');
       for(var i = 0; i < scoreObject.scores.length; i++) {
-        var span = document.createElement('span');
-        setContent(span, scoreObject.scores[i].nickname);
-        var li = document.createElement('li');
-
-        li.appendChild(span);
-        span = document.createElement('span');
-        setContent(span, scoreObject.scores[i].score);
-        li.appendChild(span);
-
-        rank.appendChild(li);
+        add_row(rank, offset + i + 1, scoreObject.scores[i].nickname, scoreObject.scores[i].score, scoreObject.scores[i].max_number);
       }
     };
     myConn.connect("scores", "GET", 'offset=' + offset, fnWhenDone);

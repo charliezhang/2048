@@ -529,7 +529,6 @@ hr {
 .rank{
   background-color: #eee4da;
   border-radius: 10px;
-  color: white;
   padding: 2px 5px 2px 5px;
   margin-top: 50px; }
 .rank a {
@@ -537,12 +536,8 @@ hr {
   margin-left: 20px;
   font-size: 15px;
 }
-.rank li {
-  border-radius: 3px;
-  color: #776e65;
-}
-.rank span {
-  margin-left: 20px;
+.rank td {
+  padding: 5px 10px 10px 50px;
 }
 
 .game-explanation img {
