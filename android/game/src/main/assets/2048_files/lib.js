@@ -42,11 +42,14 @@ function XHConn()
   return this;
 }
 
-post_json = function(path, obj) {
+post_json = function(path, obj, cb) {
   xmlhttp = new XMLHttpRequest();
   var url = "/" + path;
   xmlhttp.open("POST", url, true);
   xmlhttp.setRequestHeader("Content-type", "application/json");
+  xmlhttp.onload = function(e) {
+    cb(this.status);
+  }
   xmlhttp.send(JSON.stringify(obj));
 }
 

@@ -301,6 +301,11 @@ GameManager.prototype.postScore = function(name, metadata) {
     "score": metadata.score,
     "max_number": metadata.maxNumber,
     "payload": metadata.gameRecorder.serialize(),
+  }, function(status) {
+    if (status) {
+      window.alert('成功'); // TODO: i18n
+      window.location.assign('/?restart=1');
+    }
   }); 
 }
 
