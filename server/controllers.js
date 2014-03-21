@@ -60,6 +60,9 @@ validate = function (data, goal) {
   var moves = payload.moves.split(',');
   for (var d in moves) {
     gm.move(parseInt(moves[d]));
+    if (gm.isGameTerminated()) {
+      break;
+    }
   }
   if (!gm.isGameTerminated()) {
     return 'GAME_NOT_TERMINATED';
