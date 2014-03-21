@@ -52,7 +52,6 @@ window.requestAnimationFrame(function () {
   var showingRank = false;
   var offset = 0;
   var rank = document.getElementById('rank-table');
-  add_row(rank, '排名', '姓名', '最高得分', '最大砖块');
   document.getElementById('rank-toggle').onclick = function() {
     showingRank = !showingRank;
     document.getElementById('rank').style.display = showingRank ? 'block' : 'none';
