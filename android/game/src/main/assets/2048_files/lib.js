@@ -53,10 +53,9 @@ post_json = function(path, obj, cb) {
   xmlhttp.send(JSON.stringify(obj));
 }
 
-add_row = function(tableEle, c1, c2) {
+add_row = function(tr, c1, c2) {
   var td = document.createElement('td');
   setContent(td, c1);
-  var tr= document.createElement('tr');
   tr.appendChild(td);
 
   td = document.createElement('td');
@@ -74,15 +73,19 @@ load_score = function(offset) {
       var scoreObject = JSON.parse(oXML.responseText); 
       var rank = document.getElementById('rank-table');
       for(var i = 0; i < scoreObject.scores.length; i++) {
-        var tr = add_row(rank, scoreObject.scores[i].nickname, scoreObject.scores[i].score);
-        td = document.createElement('td');
+        var tr= document.createElement('tr');
+        var td = document.createElement('td');
+        td.className = "rank-td";
         var d1 = document.createElement('div');
         d1.className = 'rank-tile tile tile-' + scoreObject.scores[i].max_number;
         var d2 = document.createElement('div');
         d2.className = 'rank-tile tile-inner';
         d1.appendChild(d2);
+        setContent(d2, offset+i+1);
         td.appendChild(d1);
         tr.appendChild(td);
+
+        add_row(tr, scoreObject.scores[i].nickname, scoreObject.scores[i].score);
         rank.appendChild(tr);
       }
     };
