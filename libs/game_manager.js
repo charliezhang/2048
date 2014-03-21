@@ -187,7 +187,7 @@ GameManager.prototype.move = function (direction) {
 
           // The mighty 2048 tile
           if (merged.value == self.goal) {
-            self.won = true; 
+            //self.won = true; 
           }
         } else {
           self.moveTile(tile, positions.farthest);
@@ -303,8 +303,8 @@ GameManager.prototype.postScore = function(name, metadata) {
     "payload": metadata.gameRecorder.serialize(),
   }, function(status) {
     if (status) {
-      window.alert('成功'); // TODO: i18n
-      window.location.assign('/?restart=1');
+      window.alert('提交成功'); // TODO: i18n
+      window.location = "/";
     }
   }); 
 }
