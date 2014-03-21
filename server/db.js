@@ -25,8 +25,9 @@ exports.seed_exists = function(seed) {
 }
 
 exports.add_score = function(row, cb) {
-  db.run('INSERT INTO scores VALUES (?,?,?,?,?,?,?)',
-     [row.nickname, row.score, row.max_number, row.time_used, row.country, JSON.stringify(row.payload), row.payload.seed],
+  db.run('INSERT INTO scores VALUES (?,?,?,?,?,?,?,?)',
+     [row.nickname, row.score, row.max_number, row.time_used, row.country, JSON.stringify(row.payload), row.payload.seed,
+      Math.round(Date.now())],
      cb
   );
 }
