@@ -73,7 +73,8 @@ KeyboardInputManager.prototype.listen = function () {
 
     touchStartClientX = event.touches[0].clientX;
     touchStartClientY = event.touches[0].clientY;
-    event.preventDefault();
+    // Enable mobile input.
+    // event.preventDefault();
   });
 
   gameContainer.addEventListener("touchmove", function (event) {
