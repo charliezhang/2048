@@ -53,11 +53,10 @@ window.requestAnimationFrame(function () {
   var showingRank = false;
   var offset = 0;
   var rank = document.getElementById('rank-table');
-  add_row(rank, '排名', '姓名', '最高得分', '最大砖块');
   document.getElementById('rank-toggle').onclick = function() {
     showingRank = !showingRank;
     document.getElementById('rank').style.display = showingRank ? 'block' : 'none';
-    rankLink.innerText = showingRank ? "收起榜单" : "英雄榜";
+    rankLink.innerText = showingRank ? msg().HIDE_BOARD : msg().BOARD;
     if (showingRank && offset == 0) {
       load_score(offset);
       offset = offset + 10;
@@ -71,10 +70,15 @@ window.requestAnimationFrame(function () {
   if (language() != 'zh') {
     tipLink.style.display = 'none';
     expLink.style.display = 'none';
-    for (i in gameTips) gameTips[i].style.display = 'none';
     document.getElementById('game-tip-toggle').style.display = 'none';
     document.getElementById('how-to').style.display = 'none';
-    document.getElementById('tweet').innerHtml = '<a href="https://twitter.com/go2048" target="_blank">@go2048</a>';
+    document.getElementById('wechat').style.display = 'none';
+    document.getElementById('bshare').style.display = 'none';
+    var tt = document.getElementById('tweet');
+    tt.href = "https://twitter.com/go2048";
+    tt.innerHTML = '@go2048';
+    document.getElementById('rank-link').innerHTML = msg().BOARD;
+    document.getElementById('rank-more').innerHTML = msg().MORE;
   } else {
   }
 });
