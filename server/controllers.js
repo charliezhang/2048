@@ -67,7 +67,7 @@ validate = function (data, goal) {
   if (!gm.isGameTerminated()) {
     return 'GAME_NOT_TERMINATED';
   }
-  if (gm.maxNumber != data.max_number || gm.score != data.score) {
+  if ((gm.maxNumber != data.max_number) || (gm.score !== data.score)) {
     return 'SCORE_NOT_MATCH';
   }
   if (!legal) {
@@ -81,6 +81,7 @@ exports.post_scores = function (req, res) {
   req.accepts('application/json');
   if (validate(req.body) != 'OK') {
     res.send(400);
+    return;
   }
   
   db.add_score(req.body, function (err) {
