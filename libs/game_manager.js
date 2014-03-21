@@ -37,7 +37,7 @@ GameManager.prototype.keepPlaying = function () {
 GameManager.prototype.saveName = function () {
   var nameInput = document.querySelector(".name-input");
   if (!nameInput.value) {
-    window.alert('昵称不能为空');
+    window.alert(msg().EMPTY_NICKNAME);
   } else {
     this.postScore(nameInput.value, this.getMetadata()); 
   }
@@ -303,7 +303,7 @@ GameManager.prototype.postScore = function(name, metadata) {
     "payload": metadata.gameRecorder.serialize(),
   }, function(status) {
     if (status) {
-      window.alert('成功'); // TODO: i18n
+      window.alert(msg().POST_NAME_SUCCEED); 
       window.location.assign('/?restart=1');
     }
   }); 

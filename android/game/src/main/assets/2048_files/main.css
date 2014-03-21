@@ -1,4 +1,4 @@
-html, body {
+atml, body {
   margin: 0;
   padding: 0;
   background: #faf8ef;
@@ -407,6 +407,15 @@ hr {
     @media screen and (max-width: 520px) {
       .tile.tile-super .tile-inner {
         font-size: 10px; } }
+  .tile.tile-4096 .tile-inner {
+    color: #f9f6f2;
+    background: #3c3a32;
+    font-size: 30px; }
+    @media screen and (max-width: 520px) {
+      .tile.tile-super .tile-inner {
+        font-size: 10px; } }
+
+
 
 @-webkit-keyframes appear {
   0% {
@@ -531,6 +540,12 @@ hr {
   border-radius: 10px;
   padding: 2px 5px 2px 5px;
   margin-top: 50px; }
+.rank-tile {
+  width: 20px !important;
+  height: 20px !important;
+  margin: 0px 0px 0px 0px;
+  position: relative;
+}
 .rank {
   color: #776e65;
   margin-left: 20px;

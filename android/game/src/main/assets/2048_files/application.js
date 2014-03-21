@@ -36,12 +36,14 @@ window.requestAnimationFrame(function () {
   }
   
   var scoreManager = new LocalScoreManager;
+  if (language() == 'zh') {
   bShare.addEntry({
         title: '#Go2048# 一个停不下来的游戏！',
         url: 'http://go2048.com',
         summary: '我的最高得分是' + scoreManager.get() + '!',
         pic: "http://go2048.com/2048_files/og_image.png"
   });
+  }
   if (navigator.userAgent.indexOf('Android') >= 0) {
     var playStoreEls = document.getElementsByClassName('play-store');
     playStoreEls[0].style.display = 'block';
@@ -74,12 +76,17 @@ window.requestAnimationFrame(function () {
     document.getElementById('how-to').style.display = 'none';
     document.getElementById('wechat').style.display = 'none';
     document.getElementById('bshare').style.display = 'none';
+//    document.getElementById('bshareF').style.display = 'none';
     var tt = document.getElementById('tweet');
     tt.href = "https://twitter.com/go2048";
     tt.innerHTML = '@go2048';
     document.getElementById('rank-link').innerHTML = msg().BOARD;
     document.getElementById('rank-more').innerHTML = msg().MORE;
+    document.querySelector('.keep-playing-button').innerHTML = msg().CONTINUE;
+    document.querySelector('.retry-button').innerHTML = msg().RETRY;
+    document.querySelector('.save-name').innerHTML = msg().POST_NAME;
   } else {
+    document.getElementById('bshare').innerHTML = '<a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=&amp;style=3&amp;fs=4&amp;textcolor=#fff&amp;bgcolor=#9C3&amp;text=分享到&amp;pophcol=1"></script>';
   }
 });
 

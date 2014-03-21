@@ -53,7 +53,7 @@ post_json = function(path, obj, cb) {
   xmlhttp.send(JSON.stringify(obj));
 }
 
-add_row = function(tableEle, c1, c2, c3, c4) {
+add_row = function(tableEle, c1, c2) {
   var td = document.createElement('td');
   setContent(td, c1);
   var tr= document.createElement('tr');
@@ -63,15 +63,7 @@ add_row = function(tableEle, c1, c2, c3, c4) {
   setContent(td, c2);
   tr.appendChild(td);
 
-  td = document.createElement('td');
-  setContent(td, c3);
-  tr.appendChild(td);
-
-  td = document.createElement('td');
-  setContent(td, c4);
-  tr.appendChild(td);
-
-  tableEle.appendChild(tr);
+  return tr;
 }
 
 load_score = function(offset) {
@@ -82,7 +74,16 @@ load_score = function(offset) {
       var scoreObject = JSON.parse(oXML.responseText); 
       var rank = document.getElementById('rank-table');
       for(var i = 0; i < scoreObject.scores.length; i++) {
-        add_row(rank, offset + i + 1, scoreObject.scores[i].nickname, scoreObject.scores[i].score, scoreObject.scores[i].max_number);
+        var tr = add_row(rank, scoreObject.scores[i].nickname, scoreObject.scores[i].score);
+        td = document.createElement('td');
+        var d1 = document.createElement('div');
+        d1.className = 'rank-tile tile tile-' + scoreObject.scores[i].max_number;
+        var d2 = document.createElement('div');
+        d2.className = 'rank-tile tile-inner';
+        d1.appendChild(d2);
+        td.appendChild(d1);
+        tr.appendChild(td);
+        rank.appendChild(tr);
       }
     };
     myConn.connect("scores", "GET", 'offset=' + offset, fnWhenDone);
