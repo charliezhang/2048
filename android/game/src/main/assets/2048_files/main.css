@@ -1,4 +1,4 @@
-atml, body {
+html, body {
   margin: 0;
   padding: 0;
   background: #faf8ef;
@@ -414,6 +414,15 @@ hr {
     @media screen and (max-width: 520px) {
       .tile.tile-super .tile-inner {
         font-size: 10px; } }
+  .tile.tile-8192 .tile-inner {
+    color: #f9f6f2;
+    background: #3c3a32;
+    font-size: 30px; }
+    @media screen and (max-width: 520px) {
+      .tile.tile-super .tile-inner {
+        font-size: 10px; } }
+
+
 
 
 
@@ -545,14 +554,23 @@ hr {
   height: 20px !important;
   margin: 0px 0px 0px 0px;
   position: relative;
+  color: #776e65 !important;
+  line-height: 20px !important;
+  font-size: 15px !important;
+  margin: 0 10px 0 5px;
+}
+.rank-name {
+  padding: 0px 5px 0px 50x;
 }
 .rank {
   color: #776e65;
   margin-left: 20px;
   font-size: 15px;
 }
+.rank a {
+  padding: 50px 0 0 10px;
+}
 .rank td {
-  padding: 5px 10px 10px 50px;
 }
 
 .game-explanation img {
