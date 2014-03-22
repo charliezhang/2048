@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -50,6 +51,7 @@ public class Main extends Activity {
         webView.getSettings().setDatabaseEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.setWebViewClient(new MyWebViewClient());
+        webView.getSettings().setUserAgentString("2048-android");
         adView = new AdView(this, AdSize.BANNER, "a15323bd6a1058f");
         FrameLayout ads = (FrameLayout) findViewById(R.id.ads);
         ads.addView(adView);
@@ -73,13 +75,31 @@ public class Main extends Activity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        webView.loadUrl("file:///android_asset/2048.html");
+        webView.loadUrl("http://www.go2048.com");
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();;
+        }
     }
 
     private class MyWebViewClient extends WebViewClient {
+
+        public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+            return null;
+        }
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             Uri uri = Uri.parse(url);
+            Log.d(TAG, "url is " + url);
+            if (url.contains("bshare")) {
+                return true;
+            }
             if (uri.getPath().contains("/g1024/share")) {
                 String scoreStr = uri.getQueryParameter("score");
                 Bitmap bmp = Bitmap.createBitmap(webView.getWidth(), webView.getHeight(), Bitmap.Config.ARGB_8888);
@@ -103,13 +123,15 @@ public class Main extends Activity {
                 Uri imageUri = Uri.fromFile(file);
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "我刚刚完成了2048！https://play.google.com/store/apps/details?id=com.nich01as.g1024.game");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "我刚刚完成了 #Go2048#！" +
+                        "https://s3-ap-northeast-1.amazonaws.com/go2048/game.apk");
                 shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
                 shareIntent.setType("image/*");
                 shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 startActivity(Intent.createChooser(shareIntent, "send"));
+                return true;
             }
-            return true;
+            return false;
         }
 
     }
