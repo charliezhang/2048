@@ -415,7 +415,7 @@ hr {
       .tile.tile-super .tile-inner {
         font-size: 10px; } }
   .tile.tile-8192 .tile-inner {
-    color: #f9f6f2;
+    color: #581397;
     background: #3c3a32;
     font-size: 30px; }
     @media screen and (max-width: 520px) {
@@ -550,7 +550,7 @@ hr {
   padding: 2px 5px 2px 5px;
   margin-top: 50px; }
 .rank-tile {
-  width: 20px !important;
+  width: 40px !important;
   height: 20px !important;
   margin: 0px 0px 0px 0px;
   position: relative;
