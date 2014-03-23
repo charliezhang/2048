@@ -1,12 +1,15 @@
 
 function language() {
   var l_lang;
-  if (navigator.userLanguage) // Explorer
+  var url_lang = getParameters('lang');
+  if (url_lang && url_lang.length == 2)
+      l_lang = url_lang;
+  else if (navigator.userLanguage) // Explorer
       l_lang = navigator.userLanguage;
   else if (navigator.language) // FF
       l_lang = navigator.language;
   else
-      l_lang = "zh";
+      l_lang = "en";
   return l_lang.substring(0, 2);
 } 
 

@@ -113,3 +113,17 @@ setContent = function(el, text) {
     }
 }
 
+function getParameters(key) {
+  var searchString = window.location.search.substring(1),
+      params = searchString.split("&"),
+      hash = {};
+
+  if (searchString == "") return {};
+  for (var i = 0; i < params.length; i++) {
+    var val = params[i].split("=");
+    if (unescape(val[0]) == key) {
+      return unescape(val[1]);
+    }
+  }
+  return null;
+}

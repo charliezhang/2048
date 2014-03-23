@@ -60,8 +60,6 @@ window.requestAnimationFrame(function () {
     playStoreEls[0].style.display = 'block';
   }
   
-
-
   var rankLink = document.getElementById('rank-link');
   var showingRank = false;
   var offset = 0;
@@ -78,12 +76,10 @@ window.requestAnimationFrame(function () {
     document.getElementById('how-to').style.display = 'none';
     document.getElementById('wechat').style.display = 'none';
     document.getElementById('bshare').style.display = 'none';
-//    document.getElementById('bshareF').style.display = 'none';
     var tt = document.getElementById('tweet');
     tt.href = "https://twitter.com/go2048";
     tt.innerHTML = '@go2048';
   } else {
-    document.getElementById('bshare').innerHTML = '<a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=&amp;style=3&amp;fs=4&amp;textcolor=#fff&amp;bgcolor=#9C3&amp;text=分享到&amp;pophcol=1"></script>';
   }
   document.getElementById('rank-link').innerHTML = msg().BOARD;
   document.getElementById('rank-more').innerHTML = msg().MORE;
