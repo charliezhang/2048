@@ -427,8 +427,8 @@ hr {
       .tile.tile-super .tile-inner {
         font-size: 10px; } }
   .tile.tile-8192 .tile-inner {
-    color: #581397;
-    background: #3c3a32;
+    color: #f9f6f2;
+    background: #581397;
     font-size: 30px; }
     @media screen and (max-width: 520px) {
       .tile.tile-super .tile-inner {
