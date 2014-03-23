@@ -2,6 +2,7 @@ var db = require('./db.js');
 var game_manager = require('../libs/game_manager.js')
 var rand = require('../libs/rand.js')
 var countries = require('./countries.js').countries;
+var escape = require('escape-html');
 
 exports.not_found = function (req, res) {
   res.send(404);
@@ -25,8 +26,8 @@ exports.get_score = function (req, res) {
         'score': row.score,
         'payload': row.payload,
         'seed': row.seed,
-        'nickname': row.nickname,
-        'country': row.country,
+        'nickname': escape(row.nickname),
+        'country': escape(row.country),
         'timestamp': row.timestamp,
       }});
     } 

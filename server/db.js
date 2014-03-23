@@ -1,16 +1,17 @@
 var sqlite3 = require('sqlite3').verbose();
 var configs = require('./configs.js');
 var db = new sqlite3.Database(configs.SQLITE_FILENAME);
+var escape = require('escape-html');
 
 exports.get_scores = function(limit, offset, cb) {
   var scores = [];
   db.each('SELECT rowid, * FROM scores ORDER BY score DESC LIMIT ? OFFSET ?', limit || 10, offset || 0, function (err, row) {
     scores.push({
-        'nickname': row.nickname,
+        'nickname': escape(row.nickname),
         'score': row.score,
         'max_number': row.max_number,
         'time_used': row.time_used,
-        'country': row.country,
+        'country': escape(row.country),
         'id': row.rowid,
         'timestamp': row.timestamp,
     });
