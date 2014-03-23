@@ -3,10 +3,8 @@ var configs = require('./configs.js');
 var db = new sqlite3.Database(configs.SQLITE_FILENAME);
 var escape = require('escape-html');
 
-exports.get_scores = function(limit, offset, cb) {
-  var scores = [];
-  db.each('SELECT rowid, * FROM scores ORDER BY score DESC LIMIT ? OFFSET ?', limit || 10, offset || 0, function (err, row) {
-    scores.push({
+function row_to_score_obj(row) {
+    return {
         'nickname': escape(row.nickname),
         'score': row.score,
         'max_number': row.max_number,
@@ -14,9 +12,33 @@ exports.get_scores = function(limit, offset, cb) {
         'country': escape(row.country),
         'id': row.rowid,
         'timestamp': row.timestamp,
-    });
+    };
+}
+
+exports.get_scores = function(limit, offset, cb) {
+  if (limit > 100) {
+    limit = 100;
+  }
+
+  var scores = [];
+  db.each('SELECT rowid, * FROM scores ORDER BY score DESC LIMIT ? OFFSET ?', limit || 10, offset || 0, function (err, row) {
+    scores.push(row_to_score_obj(row));
   }, function() {
-    cb(scores)
+    cb(scores);
+  });
+}
+
+exports.get_scores_by_name = function(nickname, cb) {
+  if (!nickname) {
+    cb([]);
+    return;
+  }
+
+  var scores = [];
+  db.each('SELECT rowid, * FROM scores WHERE nickname LIKE ?', '%' + nickname + '%', function (err, row) {
+    scores.push(row_to_score_obj(row));
+  }, function() {
+    cb(scores);
   });
 }
 
