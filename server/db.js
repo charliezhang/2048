@@ -56,12 +56,12 @@ exports.seed_exists = function(seed) {
   // }
 }
 
-exports.add_score = function(row, cb) {
+exports.add_score = function(row, ip, cb) {
   var ts = Math.round(Date.now());
   db.serialize(function() {
-    db.run('INSERT INTO scores VALUES (?,?,?,?,?,?,?,?,?)',
+    db.run('INSERT INTO scores VALUES (?,?,?,?,?,?,?,?,?,?)',
        [row.nickname, row.score, row.max_number, row.time_used, row.country, JSON.stringify(row.payload), row.payload.seed,
-        ts, row.contact],
+        ts, row.contact, ip],
         function(err) {
           if (err) {
             cb(err, null);

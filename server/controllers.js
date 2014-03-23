@@ -115,7 +115,7 @@ exports.post_scores = function (req, res) {
     return;
   }
   
-  db.add_score(req.body, function (err, rank) {
+  db.add_score(req.body, req.ip, function (err, rank) {
     if (err == null) {
       res.json(rank);
     } else {
