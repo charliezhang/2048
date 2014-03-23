@@ -18,8 +18,8 @@ $(document).ready(function() {
       var fnWhenDone = function (scoreObject) { 
         var rank = $('#rank-table');
         for(var i = 0; i < scoreObject.scores.length; i++) {
-          score = scoreObject.scores[i];
-          var tr= $('<div>');
+          var score = scoreObject.scores[i];
+          var tr= $('<div id="' + score.id+ '">');
 	  tr.addClass('tr-' + i%2);
           var td = $('<div>');
           td.addClass("rank-td td-1");
@@ -44,9 +44,9 @@ $(document).ready(function() {
 	}
 	  country.attr('src', countryUrl);
 	  $(tr).append(country);
-    $(rank).append(tr);
-	$(tr).click(function() {
-		window.open("/?replay=" + score.id);
+	    $(rank).append(tr);
+	$(tr).click(function(e) {
+		window.open("/?replay=" + this.id);
 		});
 
         }
