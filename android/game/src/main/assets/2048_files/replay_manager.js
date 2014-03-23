@@ -2,6 +2,14 @@ function ReplayManager(id) {
   this.interval = 100;
   var that = this;
   data = get_score(id, function(score) {
+    $('#replay-name').text('| Replay:' + score.nickname);
+    $('#replay-name').removeClass('hidden');;
+    var countryUrl = 'http://www.kidlink.org//icons/f0-cn.gif';
+    if (score.country) {
+        countryUrl ='http://www.kidlink.org//icons/f0-' + score.country + '.gif';
+    }
+    $('#replay-country').attr('src', countryUrl);
+    $('#replay-country').removeClass('hidden');
     that.run(score);
   });   
 }
