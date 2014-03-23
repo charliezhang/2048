@@ -22,6 +22,12 @@ body {
 .buttons {
   margin-top: 10px;
 }
+#replay-name {
+  margin: 0 5px 0 5px;
+}
+#replay-country {
+  margin: 0 5px 0 5px;
+}
 .img-exp img {
   width: 350px;
   padding: 5px 10px 5px 10px;
