@@ -1,8 +1,8 @@
 
 function language() {
   var l_lang;
-  var url_lang = getParameters()['lang'];
-  if url_lang
+  var url_lang = getParameters('lang');
+  if (url_lang && url_lang.length == 2)
       l_lang = url_lang;
   else if (navigator.userLanguage) // Explorer
       l_lang = navigator.userLanguage;

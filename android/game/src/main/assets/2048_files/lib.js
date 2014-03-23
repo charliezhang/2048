@@ -113,7 +113,7 @@ setContent = function(el, text) {
     }
 }
 
-function getParameters() {
+function getParameters(key) {
   var searchString = window.location.search.substring(1),
       params = searchString.split("&"),
       hash = {};
@@ -121,7 +121,9 @@ function getParameters() {
   if (searchString == "") return {};
   for (var i = 0; i < params.length; i++) {
     var val = params[i].split("=");
-    hash[unescape(val[0])] = unescape(val[1]);
+    if (unescape(val[0]) == key) {
+      return unescape(val[1]);
+    }
   }
-  return hash;
+  return null;
 }
