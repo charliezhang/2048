@@ -1,1 +1,0 @@
-../../../../../../libs/game_recorder.js
