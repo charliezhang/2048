@@ -39,7 +39,7 @@ $(document).ready(function() {
           $(tr).append(scoreEl);
 	  var country = $('<img class="td-3">');
           var countryUrl = 'http://www.kidlink.org//icons/f0-cn.gif';
-	  if (score.country) {
+	  if (score.country && score.country != 'null') {
 		countryUrl ='http://www.kidlink.org//icons/f0-' + score.country + '.gif';
 	}
 	  country.attr('src', countryUrl);
