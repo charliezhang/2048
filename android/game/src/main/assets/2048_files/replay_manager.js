@@ -1,5 +1,4 @@
 function ReplayManager(id) {
-  console.log("Replay " + id);
   this.interval = 100;
   var that = this;
   data = get_score(id, function(score) {
