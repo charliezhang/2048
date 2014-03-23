@@ -100,9 +100,9 @@ exports.post_scores = function (req, res) {
     return;
   }
   
-  db.add_score(req.body, function (err) {
+  db.add_score(req.body, function (err, rank) {
     if (err == null) {
-      res.send(200);
+      res.json(rank);
     } else {
       res.status(500);
       res.json(err);

@@ -24,11 +24,11 @@ ReplayManager.prototype.run = function(score) {
   var that = this;
 
   var cb = function(moves, idx) {
-    if (idx++ < moves.length) {
-      that.timerId = window.setTimeout(function() {
-        cb(moves, idx);
-      }, that.interval);
+    if (idx < moves.length) {
       gm.move(moves[idx]);
+      that.timerId = window.setTimeout(function() {
+        cb(moves, ++idx);
+      }, that.interval);
     }
   };
   

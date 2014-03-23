@@ -34,9 +34,36 @@ exports.seed_exists = function(seed) {
 }
 
 exports.add_score = function(row, cb) {
-  db.run('INSERT INTO scores VALUES (?,?,?,?,?,?,?,?,?)',
-     [row.nickname, row.score, row.max_number, row.time_used, row.country, JSON.stringify(row.payload), row.payload.seed,
-      Math.round(Date.now()), row.contact],
-     cb
-  );
+  var ts = Math.round(Date.now());
+  db.serialize(function() {
+    db.run('INSERT INTO scores VALUES (?,?,?,?,?,?,?,?,?)',
+       [row.nickname, row.score, row.max_number, row.time_used, row.country, JSON.stringify(row.payload), row.payload.seed,
+        ts, row.contact],
+        function(err) {
+          if (err) {
+            cb(err, null);
+            return;
+          }
+
+          db.get('SELECT COUNT(score) as rank FROM scores WHERE score < ? OR' +
+                 '(score = ? AND timestamp < ?)', [row.score, row.score, ts],
+            function(err, row) {
+              if (err) {
+                cb(err, null);
+                return;
+              }
+              
+              var rank = row.rank;
+               db.get('SELECT COUNT(*) as count FROM scores', [],
+                 function(err, row) {
+                  if (err) {
+                    cb(err, null);
+                    return;
+                  }
+                  cb(err, {'rank': rank, 'count': row.count})
+                });
+            });
+        }
+    );
+  });
 }

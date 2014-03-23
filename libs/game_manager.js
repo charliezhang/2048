@@ -34,6 +34,11 @@ GameManager.prototype.keepPlaying = function () {
   this.actuator.continue();
 };
 
+GameManager.prototype.setCountry = function (country) {
+  console.log("COUNTRY: " + country);
+  this.country = country;
+};
+
 GameManager.prototype.saveName = function () {
   var nameInput = document.querySelector(".name-input");
   if (!nameInput.value) {
@@ -307,6 +312,7 @@ GameManager.prototype.postScore = function(name, metadata) {
     "score": metadata.score,
     "max_number": metadata.maxNumber,
     "payload": metadata.gameRecorder.serialize(),
+    "country": this.country,
   }, function(status) {
     if (status) {
       window.alert(msg().POST_NAME_SUCCEED); 

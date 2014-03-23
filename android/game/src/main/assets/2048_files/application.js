@@ -7,7 +7,10 @@ window.requestAnimationFrame(function () {
     document.querySelector('.best-container').style.display = "none";
     new ReplayManager(arr[1]);
   } else {
-    new GameManager(4, KeyboardInputManager, HTMLActuator, LocalScoreManager, AudioManager);
+    var gm = new GameManager(4, KeyboardInputManager, HTMLActuator, LocalScoreManager, AudioManager);
+    $.get("http://ipinfo.io", function(r) {
+      gm.setCountry(r.country.toLowerCase());
+    },"jsonp");
   }
   var toHide;
   window.isApp = navigator.userAgent.indexOf('2048-android') >= 0 || navigator.userAgent.indexOf('2048-ios') >=0;
