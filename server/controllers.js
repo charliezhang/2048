@@ -1,6 +1,7 @@
 var db = require('./db.js');
 var game_manager = require('../libs/game_manager.js')
 var rand = require('../libs/rand.js')
+var countries = require('./countries.js').countries;
 
 exports.not_found = function (req, res) {
   res.send(404);
@@ -32,8 +33,10 @@ exports.get_score = function (req, res) {
   });
 }
 
-
 validate = function (data, goal) {
+  if (data.country && countries.indexOf(data.country) < 0) {
+    return 'INVALID_COUNTRY';
+  }
   var payload = data.payload;
   var ran = new rand.Rand();
   var seed = payload.seed;
