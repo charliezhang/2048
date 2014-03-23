@@ -65,6 +65,7 @@ GameManager.prototype.setup = function (s) {
   this.over        = false;
   this.won         = false;
   this.keepPlaying = false;
+  this.isReplay    = false;
    
 
 
@@ -74,6 +75,10 @@ GameManager.prototype.setup = function (s) {
   // Update the actuator
   this.actuate();
 };
+
+GameManager.prototype.setReplay = function(r) {
+  this.isReplay = r;
+}
 
 GameManager.prototype.setGoal = function(goal) {
   this.goal = goal;
@@ -106,6 +111,7 @@ GameManager.prototype.getMetadata = function() {
     terminated: this.isGameTerminated(),
     gameRecorder: this.gameRecorder,
     maxNumber: this.maxNumber,
+    isReplay: this.isReplay,
   };
 }
 

@@ -93,6 +93,17 @@ load_score = function(offset) {
   }
 }
 
+get_score = function(id, cb) {
+  var myConn = new XHConn();
+  if (myConn) {
+    myConn.connect("score", "GET", 'id=' + id, function(oXML) {
+       var scoreObject = JSON.parse(oXML.responseText).score;
+       scoreObject.payload = JSON.parse(scoreObject.payload);
+       cb(scoreObject);
+    });
+  }
+}
+
 setContent = function(el, text) {
     if (el.textContent != "undefined") {
         el.textContent = text;

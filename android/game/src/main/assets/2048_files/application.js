@@ -1,6 +1,14 @@
 // Wait till the browser is ready to render the game (avoids glitches)
 window.requestAnimationFrame(function () {
-  new GameManager(4, KeyboardInputManager, HTMLActuator, LocalScoreManager, AudioManager);
+  var re = /replay=(\d+)/;
+  var str = window.location.search.substring(1);
+  var arr = re.exec(str);
+  if (arr) {
+    document.querySelector('.best-container').style.display = "none";
+    new ReplayManager(arr[1]);
+  } else {
+    new GameManager(4, KeyboardInputManager, HTMLActuator, LocalScoreManager, AudioManager);
+  }
   var toHide;
   window.isApp = navigator.userAgent.indexOf('2048-android') >= 0 || navigator.userAgent.indexOf('2048-ios') >=0;
   if (!isApp) {
