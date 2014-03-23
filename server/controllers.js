@@ -9,9 +9,16 @@ exports.not_found = function (req, res) {
 }
 
 exports.get_scores = function (req, res) {
-  db.get_scores(req.query.limit || 10, req.query.offset || 0, function (scores) {
-    res.json({'scores': scores});
-  });
+  if (req.query.nickname) {
+    db.get_scores_by_name(req.query.nickname, function (scores) {
+      res.json({'scores': scores});
+    });
+  } else {
+
+    db.get_scores(req.query.limit || 10, req.query.offset || 0, function (scores) {
+      res.json({'scores': scores});
+    });
+  }
 }
 
 exports.get_score = function (req, res) {
