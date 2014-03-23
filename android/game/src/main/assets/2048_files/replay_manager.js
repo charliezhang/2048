@@ -5,7 +5,7 @@ function ReplayManager(id) {
     $('#replay-name').text('| Replay:' + score.nickname);
     $('#replay-name').removeClass('hidden');;
     var countryUrl = 'http://www.kidlink.org//icons/f0-cn.gif';
-    if (score.country) {
+    if (score.country && score.country != 'null') {
         countryUrl ='http://www.kidlink.org//icons/f0-' + score.country + '.gif';
     }
     $('#replay-country').attr('src', countryUrl);
