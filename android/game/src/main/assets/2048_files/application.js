@@ -63,16 +63,7 @@ window.requestAnimationFrame(function () {
   var showingRank = false;
   var offset = 0;
   var rank = document.getElementById('rank-table');
-  document.getElementById('rank-toggle').onclick = function() {
-    showingRank = !showingRank;
-    document.getElementById('rank').style.display = showingRank ? 'block' : 'none';
-    rankLink.innerText = showingRank ? msg().HIDE_BOARD : msg().BOARD;
-    if (showingRank && offset == 0) {
-      load_score(offset);
-      offset = offset + 10;
-    }
-  }
-  document.getElementById('rank-more').onclick = function() {
+    document.getElementById('rank-more').onclick = function() {
     load_score(offset);
     offset = offset + 10;
   };

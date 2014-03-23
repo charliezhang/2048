@@ -16,30 +16,59 @@ $(document).ready(function() {
 
   var load_score = function(offset) {
       var fnWhenDone = function (scoreObject) { 
-        var rank = document.getElementById('rank-table');
+        var rank = $('#rank-table');
         for(var i = 0; i < scoreObject.scores.length; i++) {
-          var tr= document.createElement('tr');
-          var td = document.createElement('td');
-          td.className = "rank-td";
-          var d1 = document.createElement('div');
-          d1.className = 'rank-tile tile tile-' + scoreObject.scores[i].max_number;
-          var d2 = document.createElement('div');
-          d2.className = 'rank-tile tile-inner';
-          d1.appendChild(d2);
+          score = scoreObject.scores[i];
+          var tr= $('<div>');
+	  tr.addClass('tr-' + i%2);
+          var td = $('<div>');
+          td.addClass("rank-td td-1");
+          var d1 = $('<div>');
+          d1.addClass('rank-tile tile tile-' + scoreObject.scores[i].max_number);
+          var d2 = $('<div>');
+          d2.addClass('rank-tile tile-inner');
+          d1.append(d2);
           $(d2).text(offset+i+1);
-          td.appendChild(d1);
-          tr.appendChild(td);
+          td.append(d1);
+          tr.append(td);
+          var nickName = $('<div class="td-2">');
+	  nickName.text(scoreObject.scores[i].nickname);
+          $(tr).append(nickName);
+	  var scoreEl = $('<div class="td-3">'); 
+          scoreEl.text(scoreObject.scores[i].score);
+          $(tr).append(scoreEl);
+	  var country = $('<img class="td-3">');
+          var countryUrl = 'http://www.kidlink.org//icons/f0-cn.gif';
+	  if (score.country) {
+		countryUrl ='http://www.kidlink.org//icons/f0-' + score.country + '.gif';
+	}
+	  country.attr('src', countryUrl);
+	  $(tr).append(country);
+    $(rank).append(tr);
+	$(tr).click(function() {
+		window.open("/?replay=" + score.id);
+		});
 
-          add_row(tr, scoreObject.scores[i].nickname, scoreObject.scores[i].score);
-          rank.appendChild(tr);
         }
       }
 
       $.get('/scores', {'offset': offset, 'limit': 100}, function(data) {fnWhenDone(data);});
     }
   var offset = parseInt($.QueryString['offset']);
+  if (isNaN(offset) || offset < 0) {
+	offset = 0;
+}
   load_score(offset);
-  $('#more').click(function(e) {
-    window.location = '/rank.html?offset=' + (offset+100);
+  $('.previous').click(function(e) {
+	    offset = offset - 100;
+	    if (offset < 0) {
+		offset = 0;
+		}
+	    window.location = '/rank.html?offset=' + offset;
   });
+	$('.next').click(function(e) {
+	    offset = offset + 100;
+	    window.location = '/rank.html?offset=' + offset;
+  });
+
 });
