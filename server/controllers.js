@@ -12,6 +12,22 @@ exports.get_scores = function (req, res) {
   });
 }
 
+exports.get_score = function (req, res) {
+  db.get_score(req.query.id, function (err, row) {
+    if (err) {
+      res.status(500);
+      res.json(err);
+      return;
+    } else {
+      res.json({'score': {
+        'payload': row.payload,
+        'seed': row.seed,
+        'nickname': row.nickname,
+      }});
+    } 
+  });
+}
+
 
 validate = function (data, goal) {
   var payload = data.payload;
