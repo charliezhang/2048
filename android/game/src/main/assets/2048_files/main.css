@@ -32,11 +32,16 @@ body {
 .img-exp {
   text-align: center;
 }
-#img-previous {
+.previous {
   float: left;
+  line-height: 50px;
+  padding-left: 50px;
+  padding-bottom: 50px;
 }
-#img-next {
+.next {
   float: right;
+  line-height: 50px;
+  padding-right: 50px;
 }
   
 h1.title {
@@ -45,6 +50,7 @@ h1.title {
   margin: 0;
   color: rgb(88, 77, 77);
   float: left; }
+
 
 @-webkit-keyframes move-up {
   0% {
