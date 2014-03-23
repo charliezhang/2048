@@ -43,6 +43,7 @@ function XHConn()
 }
 
 post_json = function(path, obj, cb) {
+
   xmlhttp = new XMLHttpRequest();
   var url = "/" + path;
   xmlhttp.open("POST", url, true);

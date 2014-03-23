@@ -20,9 +20,13 @@ exports.get_score = function (req, res) {
       return;
     } else {
       res.json({'score': {
+        'max_number': row.max_number,
+        'score': row.score,
         'payload': row.payload,
         'seed': row.seed,
         'nickname': row.nickname,
+        'country': row.country,
+        'timestamp': row.timestamp,
       }});
     } 
   });
