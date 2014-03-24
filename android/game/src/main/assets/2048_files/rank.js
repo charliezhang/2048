@@ -66,7 +66,7 @@ $(document).ready(function() {
   });
   $('.previous').click(function(e) {
       offset = offset - 100;
-      if (offset < 0) {
+      if (offset <= 0) {
           offset = 0;
       }
 
