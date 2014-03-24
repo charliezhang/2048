@@ -65,14 +65,17 @@ $(document).ready(function() {
     e.preventDefault();
   });
   $('.previous').click(function(e) {
-              offset = offset - 100;
-              if (offset < 0) {
-                  offset = 0;
-                  }
-              window.location = '/rank.html?offset=' + offset + '&nickaname=' + nickaname;
+      offset = offset - 100;
+      if (offset < 0) {
+          offset = 0;
+      }
+
+      window.location = '/rank.html?offset=' + offset + '&nickaname=' + nickaname;
+      e.preventDefault(); 
     });
   $('.next').click(function(e) {
             offset = offset + 100;
             window.location = '/rank.html?offset=' + offset + '&nickname=' + nickname;
+      e.preventDefault(); 
   });
 });
