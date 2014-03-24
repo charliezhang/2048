@@ -10,7 +10,7 @@ exports.not_found = function (req, res) {
 
 exports.get_scores = function (req, res) {
   if (req.query.nickname) {
-    db.get_scores_by_name(req.query.nickname, function (scores) {
+    db.get_scores_by_name(req.query.nickname, req.query.limit || 10, req.query.offset || 0, function (scores) {
       res.json({'scores': scores});
     });
   } else {
@@ -115,7 +115,7 @@ exports.post_scores = function (req, res) {
     return;
   }
   
-  db.add_score(req.body, function (err, rank) {
+  db.add_score(req.body, req.ip, function (err, rank) {
     if (err == null) {
       res.json(rank);
     } else {

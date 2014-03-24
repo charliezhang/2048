@@ -13,10 +13,12 @@
 })(jQuery);
 
 $(document).ready(function() {
-
-  var load_score = function(offset) {
-      var fnWhenDone = function (scoreObject) { 
+  var fnWhenDone = function (scoreObject) { 
         var rank = $('#rank-table');
+        if (scoreObject.scores.length == 0) {
+          rank.text('No result found!');
+          return;
+        }
         for(var i = 0; i < scoreObject.scores.length; i++) {
           var score = scoreObject.scores[i];
           var tr= $('<div id="' + score.id+ '">');
@@ -48,27 +50,29 @@ $(document).ready(function() {
 	$(tr).click(function(e) {
 		window.open("/?replay=" + this.id);
 		});
-
         }
-      }
+  }
 
-      $.get('/scores', {'offset': offset, 'limit': 100}, function(data) {fnWhenDone(data);});
-    }
+  var nickname = $.QueryString['nickname'];
   var offset = parseInt($.QueryString['offset']);
   if (isNaN(offset) || offset < 0) {
-	offset = 0;
-}
-  load_score(offset);
-  $('.previous').click(function(e) {
-	    offset = offset - 100;
-	    if (offset < 0) {
-		offset = 0;
-		}
-	    window.location = '/rank.html?offset=' + offset;
-  });
-	$('.next').click(function(e) {
-	    offset = offset + 100;
-	    window.location = '/rank.html?offset=' + offset;
-  });
+        offset = 0;
+  }
 
+  $.get('/scores', {'nickname': nickname, 'offset': offset, 'limit': 100}, function(data) {fnWhenDone(data);});
+  $('#search').click(function(e) {
+    window.location = '/rank.html?nickname=' + $('#nickname').val();
+    e.preventDefault();
+  });
+  $('.previous').click(function(e) {
+              offset = offset - 100;
+              if (offset < 0) {
+                  offset = 0;
+                  }
+              window.location = '/rank.html?offset=' + offset + '&nickaname=' + nickaname;
+    });
+  $('.next').click(function(e) {
+            offset = offset + 100;
+            window.location = '/rank.html?offset=' + offset + '&nickname=' + nickname;
+  });
 });

@@ -16,6 +16,19 @@
 	padding-right: 10px;
 	overflow: hidden;
 }
+.search{
+  margin: 5px auto 15px;
+}
+.search input {
+  padding: 3px 5px 3px 5px;
+  width: 300px;
+  margin: 0 5px 0 5px;
+  border-radius: 5px;
+  background-color: #F3EEEA;
+}
+.search a {
+  margin: 0 6px 0 6px;
+}
 
 .td-3 {
 	margin-left: 7px;

@@ -28,14 +28,18 @@ exports.get_scores = function(limit, offset, cb) {
   });
 }
 
-exports.get_scores_by_name = function(nickname, cb) {
+exports.get_scores_by_name = function(nickname, limit, offset, cb) {
   if (!nickname) {
     cb([]);
     return;
   }
+  
+  if (limit > 100) {
+    limit = 100;
+  }
 
   var scores = [];
-  db.each('SELECT rowid, * FROM scores WHERE nickname LIKE ?', '%' + nickname + '%', function (err, row) {
+  db.each('SELECT rowid, * FROM scores WHERE nickname LIKE ? LIMIT ? OFFSET ?', '%' + nickname + '%', limit || 10, offset || 0, function (err, row) {
     scores.push(row_to_score_obj(row));
   }, function() {
     cb(scores);
@@ -56,12 +60,12 @@ exports.seed_exists = function(seed) {
   // }
 }
 
-exports.add_score = function(row, cb) {
+exports.add_score = function(row, ip, cb) {
   var ts = Math.round(Date.now());
   db.serialize(function() {
-    db.run('INSERT INTO scores VALUES (?,?,?,?,?,?,?,?,?)',
+    db.run('INSERT INTO scores VALUES (?,?,?,?,?,?,?,?,?,?)',
        [row.nickname, row.score, row.max_number, row.time_used, row.country, JSON.stringify(row.payload), row.payload.seed,
-        ts, row.contact],
+        ts, row.contact, ip],
         function(err) {
           if (err) {
             cb(err, null);
