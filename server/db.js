@@ -28,14 +28,18 @@ exports.get_scores = function(limit, offset, cb) {
   });
 }
 
-exports.get_scores_by_name = function(nickname, cb) {
+exports.get_scores_by_name = function(nickname, limit, offset, cb) {
   if (!nickname) {
     cb([]);
     return;
   }
+  
+  if (limit > 100) {
+    limit = 100;
+  }
 
   var scores = [];
-  db.each('SELECT rowid, * FROM scores WHERE nickname LIKE ?', '%' + nickname + '%', function (err, row) {
+  db.each('SELECT rowid, * FROM scores WHERE nickname LIKE ? LIMIT ? OFFSET ?', '%' + nickname + '%', limit || 10, offset || 0, function (err, row) {
     scores.push(row_to_score_obj(row));
   }, function() {
     cb(scores);
