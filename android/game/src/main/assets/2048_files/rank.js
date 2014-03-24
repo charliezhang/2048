@@ -70,7 +70,7 @@ $(document).ready(function() {
           offset = 0;
       }
 
-      window.location = '/rank.html?offset=' + offset + '&nickaname=' + nickname;
+      window.location = '/rank.html?offset=' + offset + '&nickname=' + nickname;
       e.preventDefault(); 
     });
   $('.next').click(function(e) {
