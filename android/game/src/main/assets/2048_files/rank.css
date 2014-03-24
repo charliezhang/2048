@@ -80,9 +80,27 @@
 		padding-right: 5px;
 		padding-bottom: 50px;
 	}
-.reply {
-	margin-right: 10px;
-	height: 30px;
-}
-
+  h2 {
+    font-size: 15px;
+  }
+  .reply {
+          margin-right: 10px;
+  }
+  .search{
+    margin: 5px auto 15px;
+  }
+  .search input {
+    padding: 3px 5px 3px 5px;
+    width: 100px;
+    margin: 0 5px 0 5px;
+    border-radius: 5px;
+    background-color: #F3EEEA;
+  }
+  .search a {
+    margin: 0 3px 0 3px;
+  }
+  .back-game {
+    margin: 3px auto 5px;
+    display: block;
+  }
 }
