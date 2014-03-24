@@ -54,6 +54,9 @@ $(document).ready(function() {
   }
 
   var nickname = $.QueryString['nickname'];
+  if (nickname) {
+    $('.search input').val(nickname);
+  }
   var offset = parseInt($.QueryString['offset']);
   if (isNaN(offset) || offset < 0) {
         offset = 0;
