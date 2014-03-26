@@ -54,6 +54,9 @@ $(document).ready(function() {
   }
 
   var nickname = $.QueryString['nickname'];
+  if (nickname == undefined) {
+    nickname = '';
+}
   if (nickname) {
     $('.search input').val(nickname);
   }
